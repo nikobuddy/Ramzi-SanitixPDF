@@ -7,7 +7,7 @@ name = "sanitixpdf"
 version = "1.0.0"
 description = "A professional platform for detecting and removing duplicate PDF files based on content comparison"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
     {name = "Nisarga Lokhande"}
@@ -22,7 +22,6 @@ classifiers = [
     "Topic :: Office/Business",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",

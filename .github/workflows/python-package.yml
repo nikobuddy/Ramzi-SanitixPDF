@@ -29,7 +29,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt || (echo "Standard install failed, trying individual packages" && pip install PyPDF2==3.0.1 Flask==3.0.0 Flask-CORS==4.0.0 Werkzeug==3.0.1)
+        pip install -r requirements.txt
     
     - name: Verify Python version
       run: |
@@ -38,71 +38,18 @@ jobs:
     
     - name: Verify dependencies
       run: |
-        python -c "import PyPDF2; print(f'PyPDF2 version: {PyPDF2.__version__}')" || echo "PyPDF2 check failed"
-        python -c "import flask; print(f'Flask version: {flask.__version__}')" || echo "Flask check failed"
-        python -c "import flask_cors; print('Flask-CORS installed')" || echo "Flask-CORS check failed"
-      continue-on-error: true
+        python -c "import PyPDF2; print(f'PyPDF2 version: {PyPDF2.__version__}')"
+        python -c "import flask; print(f'Flask version: {flask.__version__}')"
+        python -c "import flask_cors; print('Flask-CORS installed')"
     
     - name: Verify setup script
       run: |
-        python verify_setup.py || echo "Setup verification completed with warnings"
-      continue-on-error: true
+        python verify_setup.py
     
     - name: Check core imports
       run: |
-        python -c "from duplicate_pdf_detector import DuplicatePDFDetector; print('DuplicatePDFDetector imported successfully')" || echo "Core import check failed"
-      continue-on-error: true
+        python -c "from duplicate_pdf_detector import DuplicatePDFDetector; print('DuplicatePDFDetector imported successfully')"
     
     - name: Check Flask app import
       run: |
-        python -c "import app; print('Flask app imported successfully')" || echo "Flask app import check failed"
-      continue-on-error: true
-
-  test-python37:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.7"
-        cache: 'pip'
-    
-    - name: Upgrade pip
-      run: |
-        python -m pip install --upgrade pip setuptools wheel
-    
-    - name: Install dependencies (Python 3.7 compatible)
-      run: |
-        echo "Python 3.7 detected - using compatible versions"
-        pip install PyPDF2==3.0.1 Flask==2.3.3 Flask-CORS==4.0.0 Werkzeug==2.3.7 || pip install -r requirements.txt
-    
-    - name: Verify Python version
-      run: |
-        python --version
-        python -c "import sys; print('Python {}'.format(sys.version))"
-    
-    - name: Verify dependencies
-      run: |
-        python -c "import PyPDF2; print('PyPDF2 version: {}'.format(PyPDF2.__version__))" || echo "PyPDF2 check failed"
-        python -c "import flask; print('Flask version: {}'.format(flask.__version__))" || echo "Flask check failed"
-        python -c "import flask_cors; print('Flask-CORS installed')" || echo "Flask-CORS check failed"
-      continue-on-error: true
-    
-    - name: Verify setup script
-      run: |
-        python verify_setup.py || echo "Setup verification completed with warnings"
-      continue-on-error: true
-    
-    - name: Check core imports
-      run: |
-        python -c "from duplicate_pdf_detector import DuplicatePDFDetector; print('DuplicatePDFDetector imported successfully')" || echo "Core import check failed"
-      continue-on-error: true
-    
-    - name: Check Flask app import
-      run: |
-        python -c "import app; print('Flask app imported successfully')" || echo "Flask app import check failed"
-      continue-on-error: true
+        python -c "import app; print('Flask app imported successfully')"
