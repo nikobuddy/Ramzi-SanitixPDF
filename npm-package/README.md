@@ -1,4 +1,4 @@
-# @sanitixpdf/duplicate-detector
+# @nikobuddy/duplicate-detector
 
 A production-ready React/JavaScript library for detecting and removing duplicate PDF files based on content comparison. Perfect for React applications that need to manage PDF files efficiently.
 
@@ -16,11 +16,11 @@ A production-ready React/JavaScript library for detecting and removing duplicate
 ## Installation
 
 ```bash
-npm install @sanitixpdf/duplicate-detector
+npm install @nikobuddy/duplicate-detector
 # or
-yarn add @sanitixpdf/duplicate-detector
+yarn add @nikobuddy/duplicate-detector
 # or
-pnpm add @sanitixpdf/duplicate-detector
+pnpm add @nikobuddy/duplicate-detector
 ```
 
 ## Quick Start
@@ -29,7 +29,7 @@ pnpm add @sanitixpdf/duplicate-detector
 
 ```tsx
 import React from 'react';
-import { useDuplicatePDFDetector } from '@sanitixpdf/duplicate-detector';
+import { useDuplicatePDFDetector } from '@nikobuddy/duplicate-detector';
 
 function PDFManager() {
   const {
@@ -82,7 +82,7 @@ function PDFManager() {
 
 ```tsx
 import React from 'react';
-import { DuplicatePDFProvider, useDuplicatePDFContext } from '@sanitixpdf/duplicate-detector';
+import { DuplicatePDFProvider, useDuplicatePDFContext } from '@nikobuddy/duplicate-detector';
 
 function PDFUploader() {
   const { addFiles, files } = useDuplicatePDFContext();
@@ -109,7 +109,7 @@ function App() {
 ### Using Core Class Directly
 
 ```typescript
-import { DuplicatePDFDetector } from '@sanitixpdf/duplicate-detector';
+import { DuplicatePDFDetector } from '@nikobuddy/duplicate-detector';
 
 const detector = new DuplicatePDFDetector();
 

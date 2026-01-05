@@ -1,5 +1,5 @@
 {
-  "name": "@sanitixpdf/duplicate-detector",
+  "name": "@nikobuddy/duplicate-detector",
   "version": "1.0.0",
   "description": "A production-ready React/JavaScript library for detecting and removing duplicate PDF files based on content comparison",
   "main": "lib/index.js",
@@ -21,7 +21,7 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint src --ext .ts,.tsx",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "prepublishOnly": "npm run build && npm test",
+    "prepublishOnly": "npm run build",
     "prepare": "npm run build"
   },
   "keywords": [
@@ -40,7 +40,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nikobuddy/Ramzi-SanitixPDF.git",
+    "url": "git+https://github.com/nikobuddy/Ramzi-SanitixPDF.git",
     "directory": "npm-package"
   },
   "bugs": {

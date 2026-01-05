@@ -1,5 +1,5 @@
 /**
- * @sanitixpdf/duplicate-detector
+ * @nikobuddy/duplicate-detector
  * A production-ready library for detecting and removing duplicate PDF files
  * 
  * @author Nisarga Lokhande

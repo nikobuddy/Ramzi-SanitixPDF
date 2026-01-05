@@ -35,11 +35,11 @@ npm login
 
 ```bash
 # Check package.json
-npm view @sanitixpdf/duplicate-detector
+npm view @nikobuddy/duplicate-detector
 
 # Test the package locally
 npm link
-# In another project: npm link @sanitixpdf/duplicate-detector
+# In another project: npm link @nikobuddy/duplicate-detector
 ```
 
 ### 5. Publish
@@ -54,7 +54,7 @@ npm publish --access public
 
 ### 6. Verify Publication
 
-Visit: https://www.npmjs.com/package/@sanitixpdf/duplicate-detector
+Visit: https://www.npmjs.com/package/@nikobuddy/duplicate-detector
 
 ## Version Management
 
@@ -135,10 +135,10 @@ The package uses the scope `@sanitixpdf` which requires:
 
 ```bash
 # Unpublish within 72 hours
-npm unpublish @sanitixpdf/duplicate-detector@1.0.0
+npm unpublish @nikobuddy/duplicate-detector@1.0.0
 
 # Deprecate instead (recommended)
-npm deprecate @sanitixpdf/duplicate-detector@1.0.0 "Use version 1.0.1 instead"
+npm deprecate @nikobuddy/duplicate-detector@1.0.0 "Use version 1.0.1 instead"
 ```
 
 **Note**: Unpublishing should be avoided. Use deprecation instead.

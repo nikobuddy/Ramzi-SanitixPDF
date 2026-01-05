@@ -28,7 +28,7 @@ export class FileManager {
   /**
    * Create download link for file
    */
-  createDownloadLink(file: File, filename?: string): string {
+  createDownloadLink(file: File): string {
     const url = URL.createObjectURL(file);
     return url;
   }
