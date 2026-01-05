@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duplicate PDF Detector - Professional Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-file-pdf"></i> Duplicate PDF Detector</h1>
+                <p class="subtitle">Professional PDF Duplicate Detection & Management Platform</p>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Upload Section -->
+            <section class="card upload-section">
+                <h2><i class="fas fa-upload"></i> Upload PDFs</h2>
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <p>Drag and drop PDF files here or click to browse</p>
+                    <input type="file" id="fileInput" multiple accept=".pdf,.PDF" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i> Select Files
+                    </button>
+                </div>
+                <div id="uploadProgress" class="upload-progress hidden"></div>
+                <div id="uploadedFiles" class="uploaded-files"></div>
+            </section>
+
+            <!-- Statistics Dashboard -->
+            <section class="card stats-section">
+                <h2><i class="fas fa-chart-bar"></i> Statistics Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalPdfs">0</h3>
+                            <p>Total PDFs</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="uniquePdfs">0</h3>
+                            <p>Unique PDFs</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="duplicatePdfs">0</h3>
+                            <p>Duplicates Found</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="removedPdfs">0</h3>
+                            <p>Duplicates Removed</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Section -->
+            <section class="card processing-section">
+                <h2><i class="fas fa-cog"></i> Process Duplicates</h2>
+                <div class="process-controls">
+                    <button class="btn btn-success btn-large" id="processBtn" onclick="startProcessing()">
+                        <i class="fas fa-play"></i> Start Processing
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearSource()">
+                        <i class="fas fa-broom"></i> Clear Source Folder
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearFinal()">
+                        <i class="fas fa-broom"></i> Clear Final Folder
+                    </button>
+                </div>
+                <div id="processingStatus" class="processing-status hidden">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <p class="status-text" id="statusText"></p>
+                </div>
+            </section>
+
+            <!-- File Lists Section -->
+            <div class="file-lists-grid">
+                <!-- Source Files -->
+                <section class="card file-list-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-folder-open"></i> Source PDFs</h2>
+                        <span class="badge" id="sourceCount">0</span>
+                    </div>
+                    <div class="file-list" id="sourceFileList">
+                        <p class="empty-message">No PDFs in source folder</p>
+                    </div>
+                </section>
+
+                <!-- Final Files -->
+                <section class="card file-list-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-folder-check"></i> Final PDFs (Unique)</h2>
+                        <span class="badge" id="finalCount">0</span>
+                    </div>
+                    <div class="file-list" id="finalFileList">
+                        <p class="empty-message">No PDFs in final folder</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 Duplicate PDF Detector Platform. Professional Solution for PDF Management.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+
