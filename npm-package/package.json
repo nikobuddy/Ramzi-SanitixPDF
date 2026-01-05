@@ -1,0 +1,85 @@
+{
+  "name": "@sanitixpdf/duplicate-detector",
+  "version": "1.0.0",
+  "description": "A production-ready React/JavaScript library for detecting and removing duplicate PDF files based on content comparison",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types",
+    "build:cjs": "webpack --mode production --config webpack.config.js",
+    "build:esm": "webpack --mode production --config webpack.esm.config.js",
+    "build:types": "tsc --emitDeclarationOnly --outDir lib",
+    "dev": "webpack --mode development --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "prepublishOnly": "npm run build && npm test",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "pdf",
+    "duplicate",
+    "detection",
+    "react",
+    "react-hooks",
+    "file-management",
+    "content-comparison",
+    "pdfjs",
+    "browser",
+    "typescript"
+  ],
+  "author": "Nisarga Lokhande <nikobuddy@github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikobuddy/Ramzi-SanitixPDF.git",
+    "directory": "npm-package"
+  },
+  "bugs": {
+    "url": "https://github.com/nikobuddy/Ramzi-SanitixPDF/issues"
+  },
+  "homepage": "https://github.com/nikobuddy/Ramzi-SanitixPDF#readme",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^3.11.174"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "@babel/core": "^7.23.5",
+    "@babel/preset-env": "^7.23.5",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
+    "babel-loader": "^9.1.3",
+    "eslint": "^8.54.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "identity-obj-proxy": "^3.0.0",
+    "prettier": "^3.1.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
+
