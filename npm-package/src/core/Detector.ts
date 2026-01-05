@@ -217,7 +217,8 @@ export class DuplicatePDFDetector {
     const filesToRemove = new Set<string>();
 
     for (const group of groups) {
-      const keepFile = this.selectFileToKeep(group.files, keepStrategy);
+      // Select which file to keep (used for strategy logic)
+      this.selectFileToKeep(group.files, keepStrategy);
       for (const file of group.duplicates) {
         filesToRemove.add(file.id);
       }

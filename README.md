@@ -6,6 +6,8 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Flask](https://img.shields.io/badge/flask-3.0.0-blue.svg)
 ![PyPDF2](https://img.shields.io/badge/PyPDF2-3.0.1-red.svg)
+![NPM Package](https://img.shields.io/npm/v/@nikobuddy/duplicate-detector?label=npm)
+![NPM Downloads](https://img.shields.io/npm/dm/@nikobuddy/duplicate-detector)
 
 **A professional, production-ready platform for detecting and removing duplicate PDF files based on content comparison**
 
@@ -20,6 +22,15 @@
 SanitixPDF is an open-source platform that helps you identify and remove duplicate PDF files by comparing their actual content, not just filenames. It features a modern web interface and command-line tools, making it perfect for document management, library organization, and archive cleanup.
 
 ## ✨ Features
+
+### NPM Package (React/JavaScript)
+- 🎣 **React Hooks**: Easy-to-use `useDuplicatePDFDetector` hook
+- 🔍 **Content-Based Detection**: Compares PDFs by actual content using SHA-256
+- ⚡ **Fast & Efficient**: Uses PDF.js for content analysis
+- 📊 **Real-time Progress**: Track detection progress with callbacks
+- 🎯 **Multiple Strategies**: Choose how to handle duplicates
+- 📦 **TypeScript Support**: Full TypeScript definitions included
+- 🌐 **Browser Compatible**: Works in all modern browsers
 
 ### Web Interface
 - 🎨 **Modern Dashboard**: Beautiful, responsive web interface with real-time statistics
@@ -42,12 +53,41 @@ SanitixPDF is an open-source platform that helps you identify and remove duplica
 
 ## 📦 Installation
 
-### Prerequisites
+### Option 1: NPM Package (React/JavaScript Projects) ⭐ NEW!
+
+For React, Next.js, or any JavaScript/TypeScript project:
+
+```bash
+npm install @nikobuddy/duplicate-detector
+# or
+yarn add @nikobuddy/duplicate-detector
+# or
+pnpm add @nikobuddy/duplicate-detector
+```
+
+**Package**: [@nikobuddy/duplicate-detector](https://www.npmjs.com/package/@nikobuddy/duplicate-detector)
+
+**Quick Example:**
+```tsx
+import { useDuplicatePDFDetector } from '@nikobuddy/duplicate-detector';
+
+function MyComponent() {
+  const { files, addFiles, detectDuplicates, result } = useDuplicatePDFDetector();
+  
+  // Use the hook to detect duplicate PDFs
+}
+```
+
+See [npm-package/README.md](npm-package/README.md) for full documentation.
+
+### Option 2: Python Package (Web Interface & CLI)
+
+#### Prerequisites
 
 - Python 3.8 or higher
 - pip (Python package manager)
 
-### Quick Install
+#### Quick Install
 
 ```bash
 # Clone the repository
@@ -62,7 +102,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Install as Package
+#### Install as Package
 
 ```bash
 pip install -e .
@@ -121,6 +161,11 @@ SanitixPDF/
 ├── requirements.txt            # Python dependencies
 ├── start.sh                    # Production start script
 ├── verify_setup.py            # Setup verification script
+├── npm-package/               # NPM package for React/JavaScript
+│   ├── src/                   # TypeScript source files
+│   ├── lib/                   # Compiled output
+│   ├── package.json           # NPM package configuration
+│   └── README.md              # NPM package documentation
 ├── templates/
 │   └── index.html             # Web interface HTML
 ├── static/

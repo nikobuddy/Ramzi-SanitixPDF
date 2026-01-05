@@ -6,7 +6,7 @@ A complete, production-ready NPM package for React projects to detect and remove
 
 ## 📦 Package Details
 
-- **Package Name**: `@sanitixpdf/duplicate-detector`
+- **Package Name**: `@nikobuddy/duplicate-detector`
 - **Version**: 1.0.0
 - **Author**: Nisarga Lokhande
 - **License**: MIT
@@ -67,13 +67,13 @@ npm-package/
 ### Installation
 
 ```bash
-npm install @sanitixpdf/duplicate-detector
+npm install @nikobuddy/duplicate-detector
 ```
 
 ### Basic Usage
 
 ```tsx
-import { useDuplicatePDFDetector } from '@sanitixpdf/duplicate-detector';
+import { useDuplicatePDFDetector } from '@nikobuddy/duplicate-detector';
 
 function MyComponent() {
   const { files, addFiles, detectDuplicates, result } = useDuplicatePDFDetector();
@@ -180,7 +180,7 @@ The package is **100% production-ready** and can be published to NPM immediately
 
 ---
 
-**Package**: `@sanitixpdf/duplicate-detector`  
+**Package**: `@nikobuddy/duplicate-detector`  
 **Author**: Nisarga Lokhande (@nikobuddy)  
 **Repository**: https://github.com/nikobuddy/Ramzi-SanitixPDF
 

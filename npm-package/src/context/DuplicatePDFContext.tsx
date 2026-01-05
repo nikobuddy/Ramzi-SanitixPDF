@@ -2,6 +2,7 @@
  * React Context for duplicate PDF detection
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore - React will be available as peer dependency
 import React, { ReactNode, createContext, useContext } from 'react';
 import { UseDuplicatePDFDetectorOptions, UseDuplicatePDFDetectorReturn } from '../types';

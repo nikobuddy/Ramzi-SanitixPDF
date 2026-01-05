@@ -11,6 +11,7 @@ async function initializePDFJS() {
   }
 
   try {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - pdfjs-dist will be available at runtime
     const pdfjsLib = await import('pdfjs-dist');
     if (pdfjsLib.GlobalWorkerOptions && pdfjsLib.version) {
@@ -49,6 +50,7 @@ export class PDFHasher {
       await initializePDFJS();
       
       // Dynamic import of pdfjs-dist
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - pdfjs-dist will be available at runtime
       const pdfjsLib = await import('pdfjs-dist');
       const arrayBuffer = await file.arrayBuffer();
@@ -62,7 +64,10 @@ export class PDFHasher {
           const page = await pdf.getPage(i);
           const textContent = await page.getTextContent();
           const pageText = textContent.items
-            .map((item: any) => item.str)
+            .map((item) => {
+              // Type guard for TextItem with str property
+              return 'str' in item ? (item.str || '') : '';
+            })
             .join(' ');
           contentString += pageText;
         }

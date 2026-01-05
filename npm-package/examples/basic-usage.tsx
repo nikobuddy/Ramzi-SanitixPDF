@@ -2,6 +2,7 @@
  * Basic usage example
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore - React will be available in the consuming project
 import React from 'react';
 import { useDuplicatePDFDetector } from '../src';

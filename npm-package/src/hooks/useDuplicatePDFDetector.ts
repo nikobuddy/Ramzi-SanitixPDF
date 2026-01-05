@@ -8,6 +8,7 @@ import {
     UseDuplicatePDFDetectorOptions,
     UseDuplicatePDFDetectorReturn,
 } from '../types';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore - React will be available as peer dependency
 import { useCallback, useRef, useState } from 'react';
 
@@ -77,7 +78,7 @@ export function useDuplicatePDFDetector(
     async (newFiles: FileList | File[]) => {
       try {
         setError(null);
-        const addedFiles = await detectorRef.current.addFiles(newFiles);
+        await detectorRef.current.addFiles(newFiles);
         const updatedFiles = detectorRef.current.getFiles();
         setFiles(updatedFiles);
 
