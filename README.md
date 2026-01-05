@@ -1,121 +1,216 @@
-# Duplicate PDF Detector
+# SanitixPDF
 
-A Python-based platform for detecting and removing duplicate PDF files based on content comparison. This tool scans a folder of PDFs, identifies duplicates by comparing their content, removes duplicates, and moves unique PDFs to a final folder.
+<div align="center">
 
-## Features
+![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Flask](https://img.shields.io/badge/flask-3.0.0-blue.svg)
+![PyPDF2](https://img.shields.io/badge/PyPDF2-3.0.1-red.svg)
 
-- **Content-based duplicate detection**: Compares PDFs by their actual content, not just filenames
-- **Automatic duplicate removal**: Keeps one copy of each unique PDF and removes duplicates
-- **Organized output**: Moves unique PDFs to a dedicated final folder
-- **Comprehensive logging**: Detailed logs of all operations
-- **Error handling**: Robust error handling for corrupted or unreadable PDFs
-- **Statistics**: Provides summary statistics of the process
+**A professional, production-ready platform for detecting and removing duplicate PDF files based on content comparison**
 
-## Installation
+[Features](#-features) • [Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Contributing](#-contributing) • [License](#-license)
 
-1. Clone or download this repository
+</div>
 
-2. Install required dependencies:
+---
+
+## 🌟 Overview
+
+SanitixPDF is an open-source platform that helps you identify and remove duplicate PDF files by comparing their actual content, not just filenames. It features a modern web interface and command-line tools, making it perfect for document management, library organization, and archive cleanup.
+
+## ✨ Features
+
+### Web Interface
+- 🎨 **Modern Dashboard**: Beautiful, responsive web interface with real-time statistics
+- 📤 **Drag & Drop Upload**: Easy file upload with drag-and-drop support
+- 📊 **Real-time Statistics**: Live dashboard showing:
+  - Total PDFs processed
+  - Unique PDFs found
+  - Duplicates detected and removed
+- 📁 **File Management**: View, browse, and download PDFs through the web interface
+- 📈 **Progress Tracking**: Real-time progress bar during processing
+- 🔔 **Notifications**: Success and error notifications
+
+### Core Functionality
+- 🔍 **Content-Based Detection**: Compares PDFs by actual content using SHA-256 hashing
+- 🗑️ **Automatic Duplicate Removal**: Removes duplicates, keeps one copy
+- 📂 **Organized Storage**: Unique PDFs moved to final folder
+- 📝 **Comprehensive Logging**: Detailed logs of all operations
+- 🛡️ **Error Handling**: Robust error handling for corrupted or unreadable PDFs
+- 🚀 **Production Ready**: Configurable, secure, and scalable
+
+## 📦 Installation
+
+### Prerequisites
+
+- Python 3.6 or higher
+- pip (Python package manager)
+
+### Quick Install
+
 ```bash
+# Clone the repository
+git clone https://github.com/ramzi/SanitixPDF.git
+cd SanitixPDF
+
+# Create virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-## Usage
-
-### Basic Usage
-
-1. Place all PDF files you want to check in a folder (e.g., `source_pdfs`)
-
-2. Run the script:
-```bash
-python duplicate_pdf_detector.py
-```
-
-By default, the script will:
-- Look for PDFs in the `source_pdfs` folder
-- Move unique PDFs to the `final_pdfs` folder
-- Save logs in the `logs` folder
-
-### Custom Folders
-
-You can specify custom folders using command-line arguments:
+### Install as Package
 
 ```bash
-python duplicate_pdf_detector.py --source /path/to/source --final /path/to/final --logs /path/to/logs
+pip install -e .
 ```
 
-### Arguments
+## 🚀 Quick Start
 
-- `--source`: Source folder containing PDFs to check (default: `source_pdfs`)
-- `--final`: Final folder where unique PDFs will be moved (default: `final_pdfs`)
-- `--logs`: Folder for log files (default: `logs`)
+### Web Interface (Recommended)
 
-## How It Works
+1. **Start the web server:**
+   ```bash
+   python app.py
+   ```
 
-1. **Scanning**: The script scans the source folder for all PDF files
+2. **Open your browser:**
+   Navigate to `http://localhost:5000`
+
+3. **Use the interface:**
+   - Upload PDFs using drag-and-drop or file browser
+   - Click "Start Processing" to detect duplicates
+   - View statistics and download unique PDFs from the final folder
+
+### Command-Line Interface
+
+1. **Place PDFs in source folder:**
+   ```bash
+   cp /path/to/pdfs/*.pdf source_pdfs/
+   ```
+
+2. **Run the detector:**
+   ```bash
+   python duplicate_pdf_detector.py
+   ```
+
+3. **Check results:**
+   - Unique PDFs are in `final_pdfs/` folder
+   - Logs are in `logs/` folder
+
+## 📖 Documentation
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment guide
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contributing guidelines
+- **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** - Code of conduct
+- **[SECURITY.md](SECURITY.md)** - Security policy
+
+## 🏗️ Project Structure
+
+```
+SanitixPDF/
+├── app.py                      # Flask web application
+├── duplicate_pdf_detector.py   # Core duplicate detection engine
+├── config.py                   # Configuration management
+├── setup.py                    # Package installation script
+├── wsgi.py                     # WSGI entry point for production
+├── requirements.txt            # Python dependencies
+├── start.sh                    # Production start script
+├── verify_setup.py            # Setup verification script
+├── templates/
+│   └── index.html             # Web interface HTML
+├── static/
+│   ├── css/
+│   │   └── style.css          # Web interface styles
+│   └── js/
+│       └── app.js             # Web interface JavaScript
+├── .github/
+│   ├── ISSUE_TEMPLATE/        # GitHub issue templates
+│   └── PULL_REQUEST_TEMPLATE.md
+├── source_pdfs/               # Input folder for PDFs (not in git)
+├── final_pdfs/                # Output folder for unique PDFs (not in git)
+└── logs/                      # Log files directory (not in git)
+```
+
+## 🔧 How It Works
+
+1. **Upload**: PDFs are uploaded to `source_pdfs/` folder
 2. **Hashing**: Each PDF's content is hashed using SHA-256
 3. **Grouping**: PDFs with identical hashes are grouped together
-4. **Duplicate Detection**: Groups with more than one PDF are identified as duplicates
+4. **Detection**: Groups with multiple PDFs are identified as duplicates
 5. **Removal**: All but one PDF from each duplicate group is deleted
-6. **Moving**: Unique PDFs are moved to the final folder
+6. **Storage**: Unique PDFs are moved to `final_pdfs/` folder
 
-## Folder Structure
+## 🌐 API Endpoints
 
-```
-duplicate-pdf-detactore/
-├── duplicate_pdf_detector.py  # Main script
-├── requirements.txt            # Dependencies
-├── README.md                   # This file
-├── source_pdfs/                # Place your PDFs here (created automatically)
-├── final_pdfs/                 # Unique PDFs will be moved here (created automatically)
-└── logs/                       # Log files will be saved here (created automatically)
-```
+The web interface uses RESTful API endpoints:
 
-## Example
+- `GET /` - Main web interface
+- `POST /api/upload` - Upload PDF files
+- `POST /api/process` - Start duplicate detection
+- `GET /api/status` - Get processing status
+- `GET /api/stats` - Get statistics about PDFs
+- `POST /api/clear-source` - Clear source folder
+- `POST /api/clear-final` - Clear final folder
+- `GET /api/download/<filename>` - Download a PDF file
+
+## 🚀 Production Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions including:
+- Gunicorn setup
+- Nginx reverse proxy configuration
+- Systemd service setup
+- SSL/HTTPS configuration
+- Security best practices
+
+## 🧪 Testing
+
+Run the verification script to check your setup:
 
 ```bash
-# 1. Place PDFs in source_pdfs folder
-# 2. Run the script
-python duplicate_pdf_detector.py
-
-# Output:
-# Processing: document1.pdf
-# Processing: document2.pdf
-# Processing: document3.pdf
-# Found 1 groups of duplicate PDFs
-# Unique PDFs: 2
-# Duplicate PDFs to remove: 1
-# Moving unique PDFs to final folder...
+python verify_setup.py
 ```
 
-## Logging
+## 🤝 Contributing
 
-The script creates detailed log files in the `logs` folder with timestamps. Each log file includes:
-- All PDFs processed
-- Duplicates found and removed
-- Errors encountered
-- Final statistics
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) first.
 
-## Notes
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- The script compares PDFs based on their binary content hash
-- PDFs with identical content (even if filenames differ) will be considered duplicates
-- The first PDF (alphabetically) in each duplicate group is kept
-- If a PDF with the same name already exists in the final folder, a number suffix is added
-- The script handles both `.pdf` and `.PDF` file extensions
+## 📝 License
 
-## Requirements
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- Python 3.6 or higher
-- PyPDF2 library
+## 🙏 Acknowledgments
 
-## Troubleshooting
+- [PyPDF2](https://github.com/py-pdf/pypdf2) - PDF processing library
+- [Flask](https://flask.palletsprojects.com/) - Web framework
+- Contributors and users of SanitixPDF
 
-- **No PDFs found**: Make sure PDFs are in the source folder and have `.pdf` or `.PDF` extension
-- **Permission errors**: Ensure you have read/write permissions for the folders
-- **Corrupted PDFs**: The script will log errors for corrupted PDFs and continue processing others
+## 📞 Support
 
-## License
+- 🐛 **Bug Reports**: [Open an issue](https://github.com/ramzi/SanitixPDF/issues)
+- 💡 **Feature Requests**: [Open an issue](https://github.com/ramzi/SanitixPDF/issues)
+- 📧 **Questions**: Open a discussion on GitHub
 
-This project is open source and available for use.
+## ⭐ Show Your Support
 
+If you find this project useful, please consider giving it a ⭐ on GitHub!
+
+---
+
+<div align="center">
+
+**Made with ❤️ for efficient PDF management**
+
+[Report Bug](https://github.com/ramzi/SanitixPDF/issues) • [Request Feature](https://github.com/ramzi/SanitixPDF/issues) • [Documentation](https://github.com/ramzi/SanitixPDF#readme)
+
+</div>

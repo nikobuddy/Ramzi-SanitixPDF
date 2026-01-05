@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Duplicate PDF Detector - Run Script
-# This script makes it easy to run the duplicate PDF detector
+# SanitixPDF - Run Script
+# This script makes it easy to run SanitixPDF
 
 echo "=========================================="
-echo "Duplicate PDF Detector"
+echo "SanitixPDF"
 echo "=========================================="
 echo ""
 

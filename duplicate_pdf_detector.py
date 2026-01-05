@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Duplicate PDF Detector and Remover
-This script identifies duplicate PDFs based on content and keeps only unique copies.
+SanitixPDF - Duplicate PDF Detector and Remover
+This module identifies duplicate PDFs based on content and keeps only unique copies.
 """
 
 import os

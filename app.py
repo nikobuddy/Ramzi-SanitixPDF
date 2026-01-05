@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Flask Web Application for Duplicate PDF Detection
-Production-ready web interface for managing duplicate PDF detection.
+SanitixPDF - Flask Web Application
+Production-ready web interface for detecting and removing duplicate PDF files.
 """
 
 import os

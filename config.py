@@ -1,6 +1,6 @@
 """
-Configuration file for Duplicate PDF Detector
-Production-ready settings
+SanitixPDF - Configuration file
+Production-ready settings for SanitixPDF platform
 """
 
 import os

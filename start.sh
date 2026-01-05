@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Production start script for Duplicate PDF Detector
+# Production start script for SanitixPDF
 
 echo "=========================================="
-echo "Starting Duplicate PDF Detector Platform"
+echo "Starting SanitixPDF Platform"
 echo "=========================================="
 echo ""
 
