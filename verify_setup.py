@@ -43,16 +43,26 @@ def check_dependencies():
 def check_directories():
     """Check if required directories exist."""
     required_dirs = ['source_pdfs', 'final_pdfs', 'logs', 'templates', 'static']
-    all_exist = True
+    missing_dirs = []
     
     for dir_name in required_dirs:
         if Path(dir_name).exists():
             print(f"✅ {dir_name}/ directory exists")
         else:
-            print(f"❌ {dir_name}/ directory is missing")
-            all_exist = False
+            print(f"⚠️  {dir_name}/ directory missing (will be created automatically)")
+            missing_dirs.append(dir_name)
+            # Create directory if it's a runtime directory
+            if dir_name in ['source_pdfs', 'final_pdfs', 'logs']:
+                Path(dir_name).mkdir(parents=True, exist_ok=True)
+                print(f"   Created {dir_name}/ directory")
     
-    return all_exist
+    # Only fail if templates or static are missing (these should be in repo)
+    critical_dirs = ['templates', 'static']
+    for dir_name in critical_dirs:
+        if dir_name in missing_dirs:
+            return False
+    
+    return True
 
 def check_files():
     """Check if required files exist."""

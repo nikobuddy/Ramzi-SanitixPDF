@@ -14,7 +14,6 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
 from duplicate_pdf_detector import DuplicatePDFDetector
-import os
 from config import config
 
 app = Flask(__name__)
