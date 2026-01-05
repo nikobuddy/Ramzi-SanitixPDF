@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.6"
 license = {text = "MIT"}
 authors = [
-    {name = "Ramzi SanitixPDF"}
+    {name = "Nisarga Lokhande"}
 ]
 keywords = ["pdf", "duplicate", "detection", "content", "comparison", "file", "management"]
 classifiers = [
@@ -32,10 +32,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ramzi/SanitixPDF"
-Documentation = "https://github.com/ramzi/SanitixPDF#readme"
-Repository = "https://github.com/ramzi/SanitixPDF"
-"Bug Tracker" = "https://github.com/ramzi/SanitixPDF/issues"
+Homepage = "https://github.com/nikobuddy/Ramzi-SanitixPDF"
+Documentation = "https://github.com/nikobuddy/Ramzi-SanitixPDF#readme"
+Repository = "https://github.com/nikobuddy/Ramzi-SanitixPDF"
+"Bug Tracker" = "https://github.com/nikobuddy/Ramzi-SanitixPDF/issues"
 
 [project.optional-dependencies]
 dev = [

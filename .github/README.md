@@ -5,16 +5,16 @@
 ## 🚀 Quick Links
 
 - 📖 [Documentation](README.md)
-- 🐛 [Report Bug](https://github.com/ramzi/SanitixPDF/issues)
-- 💡 [Request Feature](https://github.com/ramzi/SanitixPDF/issues)
+- 🐛 [Report Bug](https://github.com/nikobuddy/Ramzi-SanitixPDF/issues)
+- 💡 [Request Feature](https://github.com/nikobuddy/Ramzi-SanitixPDF/issues)
 - 🤝 [Contribute](CONTRIBUTING.md)
 - 📄 [License](LICENSE)
 
 ## ⚡ Quick Start
 
 ```bash
-git clone https://github.com/ramzi/SanitixPDF.git
-cd SanitixPDF
+git clone https://github.com/nikobuddy/Ramzi-SanitixPDF.git
+cd Ramzi-SanitixPDF
 pip install -r requirements.txt
 python app.py
 ```

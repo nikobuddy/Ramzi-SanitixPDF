@@ -37,7 +37,7 @@ git commit -m "Initial commit: SanitixPDF v1.0.0"
 1. Go to [GitHub](https://github.com) and sign in
 2. Click the "+" icon in the top right
 3. Select "New repository"
-4. Repository name: `SanitixPDF`
+4. Repository name: `Ramzi-SanitixPDF`
 5. Description: `A professional platform for detecting and removing duplicate PDF files based on content comparison`
 6. Set to **Public** (for open source)
 7. **DO NOT** initialize with README, .gitignore, or license (we already have them)
@@ -46,8 +46,8 @@ git commit -m "Initial commit: SanitixPDF v1.0.0"
 ### 3. Connect Local Repository to GitHub
 
 ```bash
-# Add remote origin (replace 'ramzi' with your GitHub username)
-git remote add origin https://github.com/ramzi/SanitixPDF.git
+# Add remote origin
+git remote add origin https://github.com/nikobuddy/Ramzi-SanitixPDF.git
 
 # Rename branch to main (if needed)
 git branch -M main
@@ -78,7 +78,7 @@ git push -u origin main
 1. Go to **Releases**
 2. Click "Create a new release"
 3. Tag version: `v1.0.0`
-4. Release title: `SanitixPDF v1.0.0 - Initial Release`
+4. Release title: `Ramzi-SanitixPDF v1.0.0 - Initial Release`
 5. Description: Copy from CHANGELOG.md
 6. Click "Publish release"
 
@@ -98,7 +98,7 @@ The workflow file is already created at `.github/workflows/python-package.yml`. 
 
 ## 📝 Repository Description Template
 
-**Name:** SanitixPDF
+**Name:** Ramzi-SanitixPDF
 
 **Description:**
 ```

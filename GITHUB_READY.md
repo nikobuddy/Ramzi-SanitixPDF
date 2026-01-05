@@ -60,19 +60,19 @@ These folders/files are in `.gitignore` and won't be committed:
    ```bash
    git init
    git add .
-   git commit -m "Initial commit: SanitixPDF v1.0.0"
+   git commit -m "Initial commit: Ramzi-SanitixPDF v1.0.0"
    ```
 
 2. **Create GitHub Repository**:
    - Go to https://github.com/new
-   - Name: `SanitixPDF`
+   - Name: `Ramzi-SanitixPDF`
    - Description: "A professional platform for detecting and removing duplicate PDF files"
    - Set to **Public**
    - **Don't** initialize with README/license
 
 3. **Push to GitHub**:
    ```bash
-   git remote add origin https://github.com/ramzi/SanitixPDF.git
+   git remote add origin https://github.com/nikobuddy/Ramzi-SanitixPDF.git
    git branch -M main
    git push -u origin main
    ```
@@ -86,7 +86,9 @@ These folders/files are in `.gitignore` and won't be committed:
 
 ## 🎯 Repository Information
 
-**Repository Name:** `SanitixPDF`
+**Repository Name:** `Ramzi-SanitixPDF`
+**GitHub Username:** `nikobuddy`
+**Author:** Nisarga Lokhande
 
 **Description:**
 ```

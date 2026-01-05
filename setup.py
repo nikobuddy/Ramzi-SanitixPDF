@@ -18,16 +18,16 @@ with open('requirements.txt', 'r', encoding='utf-8') as f:
 setup(
     name="sanitixpdf",
     version="1.0.0",
-    author="Ramzi SanitixPDF",
+    author="Nisarga Lokhande",
     author_email="",
     description="A professional platform for detecting and removing duplicate PDF files based on content comparison",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/ramzi/SanitixPDF",
+    url="https://github.com/nikobuddy/Ramzi-SanitixPDF",
     project_urls={
-        "Bug Tracker": "https://github.com/ramzi/SanitixPDF/issues",
-        "Documentation": "https://github.com/ramzi/SanitixPDF#readme",
-        "Source Code": "https://github.com/ramzi/SanitixPDF",
+        "Bug Tracker": "https://github.com/nikobuddy/Ramzi-SanitixPDF/issues",
+        "Documentation": "https://github.com/nikobuddy/Ramzi-SanitixPDF#readme",
+        "Source Code": "https://github.com/nikobuddy/Ramzi-SanitixPDF",
     },
     packages=find_packages(),
     classifiers=[

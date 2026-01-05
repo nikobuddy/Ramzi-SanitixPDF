@@ -51,8 +51,8 @@ SanitixPDF is an open-source platform that helps you identify and remove duplica
 
 ```bash
 # Clone the repository
-git clone https://github.com/ramzi/SanitixPDF.git
-cd SanitixPDF
+git clone https://github.com/nikobuddy/Ramzi-SanitixPDF.git
+cd Ramzi-SanitixPDF
 
 # Create virtual environment (recommended)
 python3 -m venv venv
@@ -197,8 +197,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 🐛 **Bug Reports**: [Open an issue](https://github.com/ramzi/SanitixPDF/issues)
-- 💡 **Feature Requests**: [Open an issue](https://github.com/ramzi/SanitixPDF/issues)
+- 🐛 **Bug Reports**: [Open an issue](https://github.com/nikobuddy/Ramzi-SanitixPDF/issues)
+- 💡 **Feature Requests**: [Open an issue](https://github.com/nikobuddy/Ramzi-SanitixPDF/issues)
 - 📧 **Questions**: Open a discussion on GitHub
 
 ## ⭐ Show Your Support
@@ -209,8 +209,8 @@ If you find this project useful, please consider giving it a ⭐ on GitHub!
 
 <div align="center">
 
-**Made with ❤️ for efficient PDF management**
+**Made with ❤️ by Nisarga Lokhande for efficient PDF management**
 
-[Report Bug](https://github.com/ramzi/SanitixPDF/issues) • [Request Feature](https://github.com/ramzi/SanitixPDF/issues) • [Documentation](https://github.com/ramzi/SanitixPDF#readme)
+[Report Bug](https://github.com/nikobuddy/Ramzi-SanitixPDF/issues) • [Request Feature](https://github.com/nikobuddy/Ramzi-SanitixPDF/issues) • [Documentation](https://github.com/nikobuddy/Ramzi-SanitixPDF#readme)
 
 </div>

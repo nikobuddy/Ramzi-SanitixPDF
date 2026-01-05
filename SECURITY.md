@@ -11,7 +11,7 @@ We release patches for security vulnerabilities. Which versions are eligible for
 
 ## Reporting a Vulnerability
 
-Please report (suspected) security vulnerabilities to **[INSERT SECURITY EMAIL]**. You will receive a response within 48 hours. If the issue is confirmed, we will release a patch as soon as possible depending on complexity but historically within a few days.
+Please report (suspected) security vulnerabilities by opening a [security advisory](https://github.com/nikobuddy/Ramzi-SanitixPDF/security/advisories/new) on GitHub. You will receive a response within 48 hours. If the issue is confirmed, we will release a patch as soon as possible depending on complexity but historically within a few days.
 
 ## Security Best Practices
 
