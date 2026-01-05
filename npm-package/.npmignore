@@ -1,0 +1,37 @@
+# Source files
+src/
+tests/
+examples/
+
+# Build files
+*.tsbuildinfo
+*.log
+
+# Development files
+.eslintrc*
+.prettierrc*
+tsconfig.json
+webpack*.js
+jest.config.js
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Dependencies
+node_modules/
+
+# Documentation (keep README.md)
+CHANGELOG.md
+CONTRIBUTING.md
+
