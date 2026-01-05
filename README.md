@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg)
+![Python Version](https://img.shields.io/badge/python-3.7+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Flask](https://img.shields.io/badge/flask-3.0.0-blue.svg)
 ![PyPDF2](https://img.shields.io/badge/PyPDF2-3.0.1-red.svg)
@@ -44,7 +44,7 @@ SanitixPDF is an open-source platform that helps you identify and remove duplica
 
 ### Prerequisites
 
-- Python 3.6 or higher
+- Python 3.7 or higher
 - pip (Python package manager)
 
 ### Quick Install
