@@ -8,7 +8,20 @@ import { DuplicatePDFDetector } from '../src/core/Detector';
 // Mock File objects for testing
 function createMockFile(name: string, content: string = 'test content'): File {
   const blob = new Blob([content], { type: 'application/pdf' });
-  return new File([blob], name, { type: 'application/pdf' });
+  const file = new File([blob], name, { type: 'application/pdf' });
+  
+  // Ensure arrayBuffer method exists (for test environment compatibility)
+  if (!file.arrayBuffer) {
+    Object.defineProperty(file, 'arrayBuffer', {
+      value: async function() {
+        return await blob.arrayBuffer();
+      },
+      writable: true,
+      configurable: true
+    });
+  }
+  
+  return file;
 }
 
 describe('DuplicatePDFDetector', () => {
