@@ -27,16 +27,58 @@ export interface DetectionResult {
   duplicatesRemoved: number;
   processingTime: number;
   errors: string[];
+  /**
+   * Detection method used
+   */
+  method?: DetectionMethod;
+  /**
+   * Threshold used (for fuzzy matching)
+   */
+  threshold?: number;
+}
+
+/**
+ * Detection strategy types
+ */
+export type DetectionMethod = 'exact' | 'hash' | 'content' | 'hybrid' | 'fuzzy' | 'token';
+
+/**
+ * Strategy for selecting which file to keep
+ */
+export type KeepStrategy = 'first' | 'smallest' | 'largest' | 'newest' | 'oldest';
+
+/**
+ * Custom detection plugin/hook
+ */
+export interface DetectionPlugin {
+  /**
+   * Plugin name
+   */
+  name: string;
+  
+  /**
+   * Detect duplicates using custom logic
+   */
+  detect: (files: PDFFile[], options: DetectionOptions) => Promise<DuplicateGroup[]>;
 }
 
 export interface DetectionOptions {
   /**
    * Method to use for duplicate detection
-   * - 'content': Compare full PDF content (most accurate, slower)
+   * - 'exact': Exact byte-for-byte match (fastest)
    * - 'hash': Compare file hash (fast, good for exact duplicates)
-   * - 'hybrid': Use both methods (most thorough, slowest)
+   * - 'content': Compare full PDF content (most accurate, slower)
+   * - 'hybrid': Use both hash and content (most thorough, slowest)
+   * - 'fuzzy': Fuzzy matching with similarity threshold
+   * - 'token': Token-based comparison
    */
-  method?: 'content' | 'hash' | 'hybrid';
+  method?: DetectionMethod;
+  
+  /**
+   * Similarity threshold for fuzzy matching (0-1)
+   * 0.8 = 80% similarity required to be considered duplicate
+   */
+  threshold?: number;
   
   /**
    * Whether to extract and compare text content
@@ -47,6 +89,21 @@ export interface DetectionOptions {
    * Whether to compare metadata
    */
   compareMetadata?: boolean;
+  
+  /**
+   * Case sensitivity for text comparison
+   */
+  caseSensitive?: boolean;
+  
+  /**
+   * Ignore whitespace differences
+   */
+  ignoreWhitespace?: boolean;
+  
+  /**
+   * Ignore punctuation differences
+   */
+  ignorePunctuation?: boolean;
   
   /**
    * Callback for progress updates
@@ -60,13 +117,13 @@ export interface DetectionOptions {
   
   /**
    * Strategy for selecting which file to keep
-   * - 'first': Keep the first file in the group
-   * - 'smallest': Keep the smallest file
-   * - 'largest': Keep the largest file
-   * - 'newest': Keep the newest file
-   * - 'oldest': Keep the oldest file
    */
-  keepStrategy?: 'first' | 'smallest' | 'largest' | 'newest' | 'oldest';
+  keepStrategy?: KeepStrategy;
+  
+  /**
+   * Custom detection plugins
+   */
+  plugins?: DetectionPlugin[];
 }
 
 export interface UseDuplicatePDFDetectorOptions extends DetectionOptions {

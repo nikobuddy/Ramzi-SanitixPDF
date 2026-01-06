@@ -1,12 +1,22 @@
 {
   "name": "@nikobuddy/duplicate-detector",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A production-ready React/JavaScript library for detecting and removing duplicate PDF files based on content comparison",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "main": "./lib/index.js",
+  "module": "./lib/index.esm.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.js",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "lib",
+    "src",
     "README.md",
     "LICENSE"
   ],
@@ -19,10 +29,15 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src --ext .ts,.tsx",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "prepublishOnly": "npm run build",
-    "prepare": "npm run build"
+    "test:ci": "jest --ci --coverage --maxWorkers=2",
+    "lint": "eslint src tests --ext .ts,.tsx",
+    "lint:fix": "eslint src tests --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"tests/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"tests/**/*.{ts,tsx}\"",
+    "type-check": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test && npm run lint",
+    "prepare": "npm run build",
+    "audit": "npm audit --audit-level=moderate"
   },
   "keywords": [
     "pdf",
@@ -80,6 +95,9 @@
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
 
