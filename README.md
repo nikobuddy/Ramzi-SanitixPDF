@@ -143,42 +143,79 @@ pip install -e .
 
 ## 📖 Documentation
 
+### Essential Guides
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment guide
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contributing guidelines
 - **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** - Code of conduct
 - **[SECURITY.md](SECURITY.md)** - Security policy
 
+### Additional Documentation
+- **[docs/](docs/)** - Complete documentation directory
+  - Project summary and release notes
+  - Sharing and publishing guides
+  - Development documentation
+
 ## 🏗️ Project Structure
 
 ```
 SanitixPDF/
-├── app.py                      # Flask web application
-├── duplicate_pdf_detector.py   # Core duplicate detection engine
-├── config.py                   # Configuration management
-├── setup.py                    # Package installation script
-├── wsgi.py                     # WSGI entry point for production
-├── requirements.txt            # Python dependencies
-├── start.sh                    # Production start script
-├── verify_setup.py            # Setup verification script
-├── npm-package/               # NPM package for React/JavaScript
-│   ├── src/                   # TypeScript source files
-│   ├── lib/                   # Compiled output
-│   ├── package.json           # NPM package configuration
-│   └── README.md              # NPM package documentation
-├── templates/
-│   └── index.html             # Web interface HTML
-├── static/
-│   ├── css/
-│   │   └── style.css          # Web interface styles
-│   └── js/
-│       └── app.js             # Web interface JavaScript
-├── .github/
-│   ├── ISSUE_TEMPLATE/        # GitHub issue templates
-│   └── PULL_REQUEST_TEMPLATE.md
-├── source_pdfs/               # Input folder for PDFs (not in git)
-├── final_pdfs/                # Output folder for unique PDFs (not in git)
-└── logs/                      # Log files directory (not in git)
+├── 📄 Core Files
+│   ├── app.py                      # Flask web application
+│   ├── duplicate_pdf_detector.py   # Core duplicate detection engine
+│   ├── config.py                   # Configuration management
+│   ├── setup.py                    # Package installation script
+│   ├── wsgi.py                     # WSGI entry point for production
+│   ├── requirements.txt            # Python dependencies
+│   ├── verify_setup.py            # Setup verification script
+│   └── README.md                   # Main project README
+│
+├── 📦 NPM Package
+│   └── npm-package/               # NPM package for React/JavaScript
+│       ├── src/                   # TypeScript source files
+│       ├── lib/                   # Compiled output
+│       ├── examples/              # Usage examples
+│       ├── docs/                  # NPM package documentation
+│       ├── scripts/               # Publishing scripts
+│       ├── package.json           # NPM package configuration
+│       └── README.md              # NPM package documentation
+│
+├── 📚 Documentation
+│   ├── docs/                      # All documentation
+│   │   ├── development/          # Development guides
+│   │   └── README.md             # Documentation index
+│   ├── QUICKSTART.md             # Quick start guide
+│   ├── DEPLOYMENT.md             # Deployment guide
+│   ├── CONTRIBUTING.md           # Contributing guidelines
+│   ├── CODE_OF_CONDUCT.md        # Code of conduct
+│   └── SECURITY.md               # Security policy
+│
+├── 🔧 Scripts
+│   └── scripts/                   # Utility scripts
+│       ├── run.sh                # Run CLI detector
+│       ├── start.sh              # Start web server
+│       └── CREATE_RELEASE.sh     # Create GitHub release
+│
+├── 🌐 Web Interface
+│   ├── templates/
+│   │   └── index.html           # Web interface HTML
+│   └── static/
+│       ├── css/
+│       │   └── style.css        # Web interface styles
+│       └── js/
+│           └── app.js           # Web interface JavaScript
+│
+├── ⚙️ Configuration
+│   ├── .github/                  # GitHub configuration
+│   │   ├── ISSUE_TEMPLATE/      # Issue templates
+│   │   └── workflows/           # GitHub Actions
+│   ├── .gitignore               # Git ignore rules
+│   └── LICENSE                  # MIT License
+│
+└── 📁 Runtime Directories (not in git)
+    ├── source_pdfs/             # Input folder for PDFs
+    ├── final_pdfs/               # Output folder for unique PDFs
+    └── logs/                     # Log files directory
 ```
 
 ## 🔧 How It Works

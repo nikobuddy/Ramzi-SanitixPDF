@@ -1,0 +1,110 @@
+name: NPM Package CI
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'npm-package/**'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'npm-package/**'
+
+jobs:
+  test:
+    name: Test on Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+      fail-fast: false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: npm-package/package.json
+
+      - name: Install dependencies
+        working-directory: ./npm-package
+        run: npm install
+
+      - name: Run linter
+        working-directory: ./npm-package
+        run: npm run lint
+
+      - name: Run type check
+        working-directory: ./npm-package
+        run: npm run type-check
+
+      - name: Run tests
+        working-directory: ./npm-package
+        run: npm run test:ci
+
+      - name: Upload coverage to Codecov
+        if: always()
+        uses: codecov/codecov-action@v3
+        with:
+          directory: ./npm-package/coverage
+          flags: npm-package
+          name: npm-package-coverage
+          fail_ci_if_error: false
+
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: npm-package/package.json
+
+      - name: Install dependencies
+        working-directory: ./npm-package
+        run: npm install
+
+      - name: Build package
+        working-directory: ./npm-package
+        run: npm run build
+
+      - name: Check build output
+        working-directory: ./npm-package
+        run: |
+          test -f lib/index.js && echo "CJS build successful"
+          test -f lib/index.esm.js && echo "ESM build successful"
+          test -f lib/index.d.ts && echo "TypeScript definitions generated"
+
+  security:
+    name: Security audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        working-directory: ./npm-package
+        run: npm install
+
+      - name: Run security audit
+        working-directory: ./npm-package
+        run: npm audit --audit-level=moderate || echo "Security audit completed with warnings"
+        continue-on-error: true
+

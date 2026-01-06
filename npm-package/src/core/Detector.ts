@@ -2,8 +2,9 @@
  * Core duplicate PDF detection engine
  */
 
-import { DetectionOptions, DetectionResult, DuplicateGroup, PDFFile } from '../types';
+import { DetectionOptions, DetectionResult, DuplicateGroup, KeepStrategy, PDFFile } from '../types';
 
+import { DetectionStrategies } from './DetectionStrategies';
 import { FileManager } from './FileManager';
 import { PDFHasher } from './PDFHasher';
 
@@ -11,10 +12,12 @@ export class DuplicatePDFDetector {
   private files: PDFFile[] = [];
   private hasher: PDFHasher;
   private fileManager: FileManager;
+  private strategies: DetectionStrategies;
 
   constructor() {
     this.hasher = new PDFHasher();
     this.fileManager = new FileManager();
+    this.strategies = new DetectionStrategies(this.hasher);
   }
 
   /**
@@ -56,92 +59,107 @@ export class DuplicatePDFDetector {
   }
 
   /**
-   * Detect duplicate PDFs
+   * Detect duplicate PDFs (async-first API)
    */
   async detectDuplicates(options: DetectionOptions = {}): Promise<DetectionResult> {
+    return this.detectDuplicatesAsync(options);
+  }
+
+  /**
+   * Async-first API for duplicate detection
+   */
+  async detectDuplicatesAsync(options: DetectionOptions = {}): Promise<DetectionResult> {
     const startTime = Date.now();
     const errors: string[] = [];
     
     const {
       method = 'hybrid',
+      threshold = 0.8,
       compareText = true,
       compareMetadata = false,
       onProgress,
       onError,
       keepStrategy = 'first',
+      plugins = [],
     } = options;
 
     if (this.files.length === 0) {
       return this.createEmptyResult();
     }
 
-    // Update progress
     onProgress?.(10, 'Starting duplicate detection...');
 
-    // Generate hashes for all files
-    const hashMap = new Map<string, PDFFile[]>();
-    
-    for (let i = 0; i < this.files.length; i++) {
-      const file = this.files[i];
-      const progress = 10 + (i / this.files.length) * 80;
-      
-      try {
-        onProgress?.(progress, `Processing ${file.name}...`);
-        
-        let hash: string;
-        
-        if (method === 'hash') {
-          hash = await this.hasher.hashFile(file.file);
-        } else if (method === 'content') {
-          hash = await this.hasher.hashContent(file.file, {
-            compareText,
-            compareMetadata,
-          });
-        } else {
-          // Hybrid: use both
-          const fileHash = await this.hasher.hashFile(file.file);
-          const contentHash = await this.hasher.hashContent(file.file, {
-            compareText,
-            compareMetadata,
-          });
-          hash = `${fileHash}:${contentHash}`;
-        }
+    let duplicateGroups: DuplicateGroup[] = [];
 
-        file.hash = hash;
-
-        if (!hashMap.has(hash)) {
-          hashMap.set(hash, []);
+    try {
+      // Use custom plugins if provided
+      if (plugins.length > 0) {
+        for (const plugin of plugins) {
+          onProgress?.(30, `Using plugin: ${plugin.name}...`);
+          const pluginGroups = await plugin.detect(this.files, options);
+          duplicateGroups.push(...pluginGroups);
         }
-        hashMap.get(hash)!.push(file);
-      } catch (error) {
-        const errorMsg = `Error processing ${file.name}: ${error instanceof Error ? error.message : 'Unknown error'}`;
-        errors.push(errorMsg);
-        onError?.(error instanceof Error ? error : new Error(String(error)), file);
+      } else {
+        // Use built-in strategies
+        onProgress?.(20, `Using detection method: ${method}...`);
+
+        switch (method) {
+          case 'exact':
+          case 'hash':
+            duplicateGroups = await this.strategies.detectHash(this.files);
+            break;
+          case 'content':
+            duplicateGroups = await this.strategies.detectContent(this.files, {
+              compareText,
+              compareMetadata,
+            });
+            break;
+          case 'hybrid':
+            duplicateGroups = await this.strategies.detectHybrid(this.files, {
+              compareText,
+              compareMetadata,
+            });
+            break;
+          case 'fuzzy':
+            duplicateGroups = await this.strategies.detectFuzzy(this.files, threshold, {
+              compareText,
+              compareMetadata,
+              caseSensitive: options.caseSensitive,
+              ignoreWhitespace: options.ignoreWhitespace,
+              ignorePunctuation: options.ignorePunctuation,
+            });
+            break;
+          case 'token':
+            duplicateGroups = await this.strategies.detectToken(this.files, {
+              compareText,
+              caseSensitive: options.caseSensitive,
+              ignoreWhitespace: options.ignoreWhitespace,
+              ignorePunctuation: options.ignorePunctuation,
+            });
+            break;
+          default:
+            duplicateGroups = await this.strategies.detectHybrid(this.files, {
+              compareText,
+              compareMetadata,
+            });
+        }
       }
+
+      // Apply keep strategy to groups
+      for (const group of duplicateGroups) {
+        const keepFile = this.selectFileToKeep(group.files, keepStrategy);
+        group.keepFile = keepFile;
+        group.duplicates = group.files.filter(f => f.id !== keepFile.id);
+      }
+
+      onProgress?.(90, 'Analyzing duplicates...');
+    } catch (error) {
+      const errorMsg = `Error during detection: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      errors.push(errorMsg);
+      onError?.(error instanceof Error ? error : new Error(String(error)), this.files[0]);
     }
 
-    onProgress?.(90, 'Analyzing duplicates...');
-
-    // Find duplicate groups
-    const duplicateGroups: DuplicateGroup[] = [];
-    let duplicatesFound = 0;
-
-    for (const [hash, files] of hashMap.entries()) {
-      if (files.length > 1) {
-        const keepFile = this.selectFileToKeep(files, keepStrategy);
-        const duplicates = files.filter(f => f.id !== keepFile.id);
-        
-        duplicateGroups.push({
-          hash,
-          files,
-          keepFile,
-          duplicates,
-        });
-
-        duplicatesFound += duplicates.length;
-      }
-    }
-
+    const duplicatesFound = duplicateGroups.reduce((sum, group) => sum + group.duplicates.length, 0);
     onProgress?.(100, 'Detection complete');
 
     const processingTime = Date.now() - startTime;
@@ -154,6 +172,8 @@ export class DuplicatePDFDetector {
       duplicatesRemoved: 0,
       processingTime,
       errors,
+      method,
+      threshold: method === 'fuzzy' ? threshold : undefined,
     };
 
     return result;
@@ -210,17 +230,25 @@ export class DuplicatePDFDetector {
   }
 
   /**
+   * Remove duplicate files from the list (async version)
+   */
+  async removeDuplicatesAsync(keepStrategy: KeepStrategy = 'first'): Promise<PDFFile[]> {
+    return this.removeDuplicates(keepStrategy);
+  }
+
+  /**
    * Remove duplicate files from the list
    */
-  removeDuplicates(keepStrategy: 'first' | 'smallest' | 'largest' | 'newest' | 'oldest' = 'first'): PDFFile[] {
+  removeDuplicates(keepStrategy: KeepStrategy = 'first'): PDFFile[] {
     const groups = this.getDuplicateGroups();
     const filesToRemove = new Set<string>();
 
     for (const group of groups) {
-      // Select which file to keep (used for strategy logic)
-      this.selectFileToKeep(group.files, keepStrategy);
-      for (const file of group.duplicates) {
-        filesToRemove.add(file.id);
+      const keepFile = this.selectFileToKeep(group.files, keepStrategy);
+      for (const file of group.files) {
+        if (file.id !== keepFile.id) {
+          filesToRemove.add(file.id);
+        }
       }
     }
 
@@ -240,7 +268,7 @@ export class DuplicatePDFDetector {
    */
   private selectFileToKeep(
     files: PDFFile[],
-    strategy: 'first' | 'smallest' | 'largest' | 'newest' | 'oldest'
+    strategy: KeepStrategy
   ): PDFFile {
     switch (strategy) {
       case 'smallest':
