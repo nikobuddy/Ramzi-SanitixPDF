@@ -94,6 +94,10 @@ dmypy.json
 *.bak
 *.swp
 
+# Documentation build artifacts
+docs/_build/
+docs/.doctrees/
+
 # Database
 *.db
 *.sqlite
