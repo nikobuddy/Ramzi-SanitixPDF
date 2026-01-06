@@ -44,8 +44,7 @@ jobs:
 
       - name: Run tests
         working-directory: ./npm-package
-        run: npm run test:ci || npm test
-        continue-on-error: false
+        run: npm run test:ci
 
       - name: Upload coverage to Codecov
         if: always()
