@@ -107,3 +107,64 @@ docs/.doctrees/
 *.pyc
 *.pyo
 *.pyd
+
+# Node.js / NPM (root level - no root package.json needed)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+
+# Root package-lock.json (if exists but not needed)
+/package-lock.json
+
+# NPM Package - Build outputs (should be built, not committed)
+npm-package/lib/
+npm-package/dist/
+npm-package/coverage/
+npm-package/.nyc_output/
+
+# NPM Package - Temporary files
+npm-package/*.log
+npm-package/.npmrc
+npm-package/.DS_Store
+npm-package/package-lock.json
+
+# Build artifacts
+*.map
+*.min.js
+*.min.css
+
+# Test coverage
+coverage/
+.nyc_output/
+*.lcov
+.jest/
+
+# Temporary documentation files (move to docs/ if needed)
+*_COMPLETE.md
+*_SUMMARY.md
+*_CHECKLIST.md
+*_NOW.md
+*_WITH_OTP.md
+*_WITH_2FA.md
+*_FIX.md
+*_READY.md
+*_SETUP.md
+*_STEPS.md
+*_SUCCESS.md
+*_REORGANIZED.md
+*_FIXED.md
+*_ISSUE.md
+
+# Keep only essential docs in root
+!README.md
+!QUICKSTART.md
+!DEPLOYMENT.md
+!CONTRIBUTING.md
+!CODE_OF_CONDUCT.md
+!SECURITY.md
+!CHANGELOG.md
+!AUTHORS.md
+!PROJECT_STRUCTURE.md
