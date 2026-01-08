@@ -24,7 +24,7 @@ class Config:
     
     # Server configuration
     HOST = os.environ.get('HOST') or '0.0.0.0'
-    PORT = int(os.environ.get('PORT') or 5000)
+    PORT = int(os.environ.get('PORT') or 8080)  # Changed default from 5000 to 8080 (5000 conflicts with AirPlay on macOS)
     DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 class ProductionConfig(Config):
